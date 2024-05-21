@@ -23,7 +23,7 @@ public final class Mensaje {
 		return contenido;
 	}
 	
-	private final TipoMensaje getTipo() {
+	public final TipoMensaje getTipo() {
 		return getCodigo().getTipo();
 	}
 	
