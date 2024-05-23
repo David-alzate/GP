@@ -1,29 +1,29 @@
-package co.com.park.gp.dto;
+package co.com.park.gp.entity;
 
 import java.util.UUID;
 
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 
-public final class ParqueaderoDTO {
+public final class PaisEntity {
 
 	private UUID id;
 	private String nombre;
 
-	public ParqueaderoDTO() {
+	public PaisEntity() {
 		super();
 	}
 
-	public ParqueaderoDTO(final UUID id, final String nombre) {
+	public PaisEntity(final UUID id, final String nombre) {
 		setId(id);
 		setNombre(nombre);
 	}
 
-	private final void setId(final UUID id) {
+	public final void setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 	}
 
-	private final void setNombre(final String nombre) {
+	public final void setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 	}
 

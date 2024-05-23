@@ -1,4 +1,4 @@
-package co.com.park.gp.dto;
+package co.com.park.gp.entity;
 
 import java.util.UUID;
 
@@ -6,32 +6,32 @@ import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 
-public final class CiudadDTO {
+public final class CiudadEntity {
 
 	private UUID id;
 	private String nombre;
-	private DepartamentoDTO departamento;
+	private DepartamentoEntity departamento;
 
-	public CiudadDTO() {
+	public CiudadEntity() {
 		super();
 	}
 
-	public CiudadDTO(final UUID id, final String nombre, final DepartamentoDTO departamento) {
+	public CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
 		setId(id);
 		setNombre(nombre);
 		setDepartamento(departamento);
 	}
 
-	private final void setId(final UUID id) {
+	public final void setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 	}
 
-	private final void setNombre(final String nombre) {
+	public final void setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 	}
 
-	private final void setDepartamento(final DepartamentoDTO departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoDTO());
+	public final void setDepartamento(final DepartamentoEntity departamento) {
+		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());
 	}
 
 	public final UUID getId() {
@@ -42,7 +42,7 @@ public final class CiudadDTO {
 		return nombre;
 	}
 
-	public final DepartamentoDTO getDepartamento() {
+	public final DepartamentoEntity getDepartamento() {
 		return departamento;
 	}
 
