@@ -42,53 +42,69 @@ public final class SedeEntity {
 		setPais(pais);
 		setDepartamento(departamento);
 	}
+	
+	public static final SedeEntity build() {
+		return new SedeEntity();
+	}
 
-	public final void setId(final UUID id) {
+	private final SedeEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
 	}
 
-	public final void setParqueadero(final ParqueaderoEntity parqueadero) {
+	private final SedeEntity setParqueadero(final ParqueaderoEntity parqueadero) {
 		this.parqueadero = ObjectHelper.getObjectHelper().getDefaultValue(parqueadero, new ParqueaderoEntity());
+		return this;
 	}
 
-	public final void setNombre(final String nombre) {
+	private final SedeEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
-	public final void setCiudad(final CiudadEntity ciudad) {
+	private final SedeEntity setCiudad(final CiudadEntity ciudad) {
 		this.ciudad = ObjectHelper.getObjectHelper().getDefaultValue(ciudad, new CiudadEntity());
+		return this;
 	}
 
-	public final void setDireccion(final String direccion) {
+	private final SedeEntity setDireccion(final String direccion) {
 		this.direccion = TextHelper.applyTrim(direccion);
+		return this;
 	}
 
-	public final void setCorreoElectronico(final String correoElectronico) {
+	private final SedeEntity setCorreoElectronico(final String correoElectronico) {
 		this.correoElectronico = TextHelper.applyTrim(correoElectronico);
+		return this;
 	}
 
-	public final void setCeldasCarro(final int celdasCarro) {
+	private final SedeEntity setCeldasCarro(final int celdasCarro) {
 		this.celdasCarro = celdasCarro;
+		return this;
 	}
 
-	public final void setCeldasMoto(final int celdasMoto) {
+	private final SedeEntity setCeldasMoto(final int celdasMoto) {
 		this.celdasMoto = celdasMoto;
+		return this;
 	}
 
-	public final void setCeldascamion(final int celdascamion) {
+	private final SedeEntity setCeldascamion(final int celdascamion) {
 		this.celdascamion = celdascamion;
+		return this;
 	}
 
-	public final void setTipoSede(final TipoSedeEntity tipoSede) {
+	private final SedeEntity setTipoSede(final TipoSedeEntity tipoSede) {
 		this.tipoSede = ObjectHelper.getObjectHelper().getDefaultValue(tipoSede, new TipoSedeEntity());
+		return this;
 	}
 
-	public final void setPais(final PaisEntity pais) {
+	private final SedeEntity setPais(final PaisEntity pais) {
 		this.pais = ObjectHelper.getObjectHelper().getDefaultValue(pais, new PaisEntity());
+		return this;
 	}
 
-	public final void setDepartamento(final DepartamentoEntity departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());;
+	private final SedeEntity setDepartamento(final DepartamentoEntity departamento) {
+		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());
+		return this;
 	}
 
 	public final UUID getId() {

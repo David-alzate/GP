@@ -7,24 +7,21 @@ import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.dto.CiudadDTO;
 import co.com.park.gp.dto.DepartamentoDTO;
 
-public final class CiudadAssemblerDTO implements AssemblerDTO <CiudadDomain, CiudadDTO> {
-	
-	
-	private static final AssemblerDTO<CiudadDomain, CiudadDTO> instance = 
-			new CiudadAssemblerDTO();
-		
+public final class CiudadAssemblerDTO implements AssemblerDTO<CiudadDomain, CiudadDTO> {
+
+	private static final AssemblerDTO<DepartamentoDomain, DepartamentoDTO> departamentoAssembler = DepartamentoAssemblerDTO
+			.getInstance();
+
+	private static final AssemblerDTO<CiudadDomain, CiudadDTO> instance = new CiudadAssemblerDTO();
+
 	private CiudadAssemblerDTO() {
 		super();
 	}
 
-	public static final AssemblerDTO<CiudadDomain, CiudadDTO> getInstance(){
+	public static final AssemblerDTO<CiudadDomain, CiudadDTO> getInstance() {
 		return instance;
 	}
-	
-	
-	private static final AssemblerDTO<DepartamentoDomain, DepartamentoDTO> departamentoAssembler
-	= DepartamentoAssemblerDTO.getInstance();
-	
+
 	@Override
 	public CiudadDomain toDomain(CiudadDTO data) {
 		var ciudadDtoTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, CiudadDTO.build());
@@ -36,7 +33,8 @@ public final class CiudadAssemblerDTO implements AssemblerDTO <CiudadDomain, Ciu
 	public CiudadDTO toDto(CiudadDomain domain) {
 		var ciudadDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, CiudadDomain.build());
 		var departamentoDTO = departamentoAssembler.toDto(ciudadDomainTmp.getDepartamento());
-		return CiudadDTO.build().setId(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre()).setDepartamento(departamentoDTO);
+		return CiudadDTO.build().setId(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre())
+				.setDepartamento(departamentoDTO);
 	}
 
 }

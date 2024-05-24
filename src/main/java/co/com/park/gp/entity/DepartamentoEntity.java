@@ -2,6 +2,7 @@ package co.com.park.gp.entity;
 
 import java.util.UUID;
 
+
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
@@ -21,17 +22,24 @@ public final class DepartamentoEntity {
 		setNombre(nombre);
 		setPais(pais);
 	}
+	
+	public static final DepartamentoEntity build() {
+		return new DepartamentoEntity();
+	}
 
-	public final void setId(final UUID id) {
+	public final DepartamentoEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
 	}
 
-	public final void setNombre(final String nombre) {
+	public final DepartamentoEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
-	public final void setPais(final PaisEntity pais) {
+	public final DepartamentoEntity setPais(final PaisEntity pais) {
 		this.pais = ObjectHelper.getObjectHelper().getDefaultValue(pais, new PaisEntity());
+		return this;
 	}
 
 	public final UUID getId() {

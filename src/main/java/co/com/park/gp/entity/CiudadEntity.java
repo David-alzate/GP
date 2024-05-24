@@ -22,16 +22,23 @@ public final class CiudadEntity {
 		setDepartamento(departamento);
 	}
 
-	public final void setId(final UUID id) {
+	public static final CiudadEntity build() {
+		return new CiudadEntity();
+	}
+	
+	public final CiudadEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
 	}
 
-	public final void setNombre(final String nombre) {
+	public final CiudadEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
-	public final void setDepartamento(final DepartamentoEntity departamento) {
+	public final CiudadEntity setDepartamento(final DepartamentoEntity departamento) {
 		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());
+		return this;
 	}
 
 	public final UUID getId() {

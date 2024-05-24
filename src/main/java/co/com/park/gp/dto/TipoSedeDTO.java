@@ -18,13 +18,19 @@ public final class TipoSedeDTO {
 		setId(id);
 		setNombre(nombre);
 	}
-
-	private final void setId(final UUID id) {
-		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+	
+	public static final TipoSedeDTO build() {
+		return new TipoSedeDTO();
 	}
 
-	private final void setNombre(final String nombre) {
+	public final TipoSedeDTO setId(final UUID id) {
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
+	}
+
+	public final TipoSedeDTO setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
 	public final UUID getId() {

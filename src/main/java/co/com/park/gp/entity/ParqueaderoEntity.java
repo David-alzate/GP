@@ -18,13 +18,19 @@ public final class ParqueaderoEntity {
 		setId(id);
 		setNombre(nombre);
 	}
-
-	public final void setId(final UUID id) {
-		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+	
+	public static final ParqueaderoEntity build() {
+		return new ParqueaderoEntity();
 	}
 
-	public final void setNombre(final String nombre) {
+	private final ParqueaderoEntity setId(final UUID id) {
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
+	}
+
+	private final ParqueaderoEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
 	public final UUID getId() {

@@ -42,53 +42,69 @@ public final class SedeDTO {
 		setPais(pais);
 		setDepartamento(departamento);
 	}
+	
+	public static final SedeDTO build() {
+		return new SedeDTO();
+	}
 
-	private final void setId(final UUID id) {
+	public final SedeDTO setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
 	}
 
-	private final void setParqueadero(final ParqueaderoDTO parqueadero) {
+	public final SedeDTO setParqueadero(final ParqueaderoDTO parqueadero) {
 		this.parqueadero = ObjectHelper.getObjectHelper().getDefaultValue(parqueadero, new ParqueaderoDTO());
+		return this;
 	}
 
-	private final void setNombre(final String nombre) {
+	public final SedeDTO setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
-	private final void setCiudad(final CiudadDTO ciudad) {
-		this.ciudad = ObjectHelper.getObjectHelper().getDefaultValue(ciudad, new CiudadDTO());;
+	public final SedeDTO setCiudad(final CiudadDTO ciudad) {
+		this.ciudad = ObjectHelper.getObjectHelper().getDefaultValue(ciudad, new CiudadDTO());
+		return this;
 	}
 
-	private final void setDireccion(final String direccion) {
+	public final SedeDTO setDireccion(final String direccion) {
 		this.direccion = TextHelper.applyTrim(direccion);
+		return this;
 	}
 
-	private final void setCorreoElectronico(final String correoElectronico) {
+	public final SedeDTO setCorreoElectronico(final String correoElectronico) {
 		this.correoElectronico = TextHelper.applyTrim(correoElectronico);
+		return this;
 	}
 
-	private final void setCeldasCarro(final int celdasCarro) {
+	public final SedeDTO setCeldasCarro(final int celdasCarro) {
 		this.celdasCarro = celdasCarro;
+		return this;
 	}
 
-	private final void setCeldasMoto(final int celdasMoto) {
+	public final SedeDTO setCeldasMoto(final int celdasMoto) {
 		this.celdasMoto = celdasMoto;
+		return this;
 	}
 
-	private final void setCeldascamion(final int celdascamion) {
+	public final SedeDTO setCeldascamion(final int celdascamion) {
 		this.celdascamion = celdascamion;
+		return this;
 	}
 
-	private final void setTipoSede(final TipoSedeDTO tipoSede) {
+	public final SedeDTO setTipoSede(final TipoSedeDTO tipoSede) {
 		this.tipoSede = ObjectHelper.getObjectHelper().getDefaultValue(tipoSede, new TipoSedeDTO());
+		return this;
 	}
 
-	private final void setPais(final PaisDTO pais) {
+	public final SedeDTO setPais(final PaisDTO pais) {
 		this.pais = ObjectHelper.getObjectHelper().getDefaultValue(pais, new PaisDTO());
+		return this;
 	}
 
-	private final void setDepartamento(final DepartamentoDTO departamento) {
-		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoDTO());;
+	public final SedeDTO setDepartamento(final DepartamentoDTO departamento) {
+		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoDTO());
+		return this;
 	}
 
 	public final UUID getId() {

@@ -4,17 +4,15 @@ import co.com.park.gp.business.assembler.entity.AssemblerEntity;
 import co.com.park.gp.business.domain.PaisDomain;
 import co.com.park.gp.entity.PaisEntity;
 
-public final class PaisAssemblerEntity implements AssemblerEntity  <PaisDomain, PaisEntity> {
-	
-	private static final AssemblerEntity <PaisDomain, PaisEntity> instance = 
-			new PaisAssemblerEntity();
-	
-	
+public final class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEntity> {
+
+	private static final AssemblerEntity<PaisDomain, PaisEntity> instance = new PaisAssemblerEntity();
+
 	private PaisAssemblerEntity() {
 		super();
 	}
-	
-	public static final AssemblerEntity <PaisDomain, PaisEntity> getInstance(){
+
+	public static final AssemblerEntity<PaisDomain, PaisEntity> getInstance() {
 		return instance;
 	}
 

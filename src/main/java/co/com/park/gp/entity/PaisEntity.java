@@ -2,6 +2,7 @@ package co.com.park.gp.entity;
 
 import java.util.UUID;
 
+
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 
@@ -19,12 +20,19 @@ public final class PaisEntity {
 		setNombre(nombre);
 	}
 
-	public final void setId(final UUID id) {
+	public static final PaisEntity build() {
+		return new PaisEntity();
+	
+	}
+	
+	public final PaisEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
 	}
 
-	public final void setNombre(final String nombre) {
+	public final PaisEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
 	public final UUID getId() {

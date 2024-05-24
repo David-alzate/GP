@@ -18,13 +18,19 @@ public final class ParqueaderoDTO {
 		setId(id);
 		setNombre(nombre);
 	}
-
-	private final void setId(final UUID id) {
-		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+	
+	public static final ParqueaderoDTO build() {
+		return new ParqueaderoDTO();
 	}
 
-	private final void setNombre(final String nombre) {
+	public final ParqueaderoDTO setId(final UUID id) {
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
+		return this;
+	}
+
+	public final ParqueaderoDTO setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
+		return this;
 	}
 
 	public final UUID getId() {
