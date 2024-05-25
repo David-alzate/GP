@@ -47,17 +47,17 @@ public final class SedeEntity {
 		return new SedeEntity();
 	}
 
-	private final SedeEntity setId(final UUID id) {
+	public final SedeEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 
-	private final SedeEntity setParqueadero(final ParqueaderoEntity parqueadero) {
+	public final SedeEntity setParqueadero(final ParqueaderoEntity parqueadero) {
 		this.parqueadero = ObjectHelper.getObjectHelper().getDefaultValue(parqueadero, new ParqueaderoEntity());
 		return this;
 	}
 
-	private final SedeEntity setNombre(final String nombre) {
+	public final SedeEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}

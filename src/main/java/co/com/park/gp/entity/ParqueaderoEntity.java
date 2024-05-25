@@ -23,12 +23,12 @@ public final class ParqueaderoEntity {
 		return new ParqueaderoEntity();
 	}
 
-	private final ParqueaderoEntity setId(final UUID id) {
+	public final ParqueaderoEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 
-	private final ParqueaderoEntity setNombre(final String nombre) {
+	public final ParqueaderoEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
