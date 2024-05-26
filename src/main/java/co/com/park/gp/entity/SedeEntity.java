@@ -62,47 +62,47 @@ public final class SedeEntity {
 		return this;
 	}
 
-	private final SedeEntity setCiudad(final CiudadEntity ciudad) {
+	public final SedeEntity setCiudad(final CiudadEntity ciudad) {
 		this.ciudad = ObjectHelper.getObjectHelper().getDefaultValue(ciudad, new CiudadEntity());
 		return this;
 	}
 
-	private final SedeEntity setDireccion(final String direccion) {
+	public final SedeEntity setDireccion(final String direccion) {
 		this.direccion = TextHelper.applyTrim(direccion);
 		return this;
 	}
 
-	private final SedeEntity setCorreoElectronico(final String correoElectronico) {
+	public final SedeEntity setCorreoElectronico(final String correoElectronico) {
 		this.correoElectronico = TextHelper.applyTrim(correoElectronico);
 		return this;
 	}
 
-	private final SedeEntity setCeldasCarro(final int celdasCarro) {
+	public final SedeEntity setCeldasCarro(final int celdasCarro) {
 		this.celdasCarro = celdasCarro;
 		return this;
 	}
 
-	private final SedeEntity setCeldasMoto(final int celdasMoto) {
+	public final SedeEntity setCeldasMoto(final int celdasMoto) {
 		this.celdasMoto = celdasMoto;
 		return this;
 	}
 
-	private final SedeEntity setCeldascamion(final int celdascamion) {
+	public final SedeEntity setCeldascamion(final int celdascamion) {
 		this.celdascamion = celdascamion;
 		return this;
 	}
 
-	private final SedeEntity setTipoSede(final TipoSedeEntity tipoSede) {
+	public final SedeEntity setTipoSede(final TipoSedeEntity tipoSede) {
 		this.tipoSede = ObjectHelper.getObjectHelper().getDefaultValue(tipoSede, new TipoSedeEntity());
 		return this;
 	}
 
-	private final SedeEntity setPais(final PaisEntity pais) {
+	public final SedeEntity setPais(final PaisEntity pais) {
 		this.pais = ObjectHelper.getObjectHelper().getDefaultValue(pais, new PaisEntity());
 		return this;
 	}
 
-	private final SedeEntity setDepartamento(final DepartamentoEntity departamento) {
+	public final SedeEntity setDepartamento(final DepartamentoEntity departamento) {
 		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());
 		return this;
 	}

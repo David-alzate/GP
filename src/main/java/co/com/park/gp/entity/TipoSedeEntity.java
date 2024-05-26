@@ -23,12 +23,12 @@ public final class TipoSedeEntity {
 		return new TipoSedeEntity();
 	}
 
-	private final TipoSedeEntity setId(final UUID id) {
+	public final TipoSedeEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 
-	private final TipoSedeEntity setNombre(final String nombre) {
+	public final TipoSedeEntity setNombre(final String nombre) {
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}

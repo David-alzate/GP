@@ -7,6 +7,7 @@ import co.com.park.gp.business.domain.PaisDomain;
 import co.com.park.gp.business.domain.ParqueaderoDomain;
 import co.com.park.gp.business.domain.SedeDomain;
 import co.com.park.gp.business.domain.TipoSedeDomain;
+import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.entity.CiudadEntity;
 import co.com.park.gp.entity.DepartamentoEntity;
 import co.com.park.gp.entity.PaisEntity;
@@ -38,14 +39,32 @@ public class SedeAssemblerEntity implements AssemblerEntity<SedeDomain, SedeEnti
 
 	@Override
 	public SedeDomain toDomain(SedeEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+		var sedeEntityTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, SedeEntity.build());
+		var parqueaderoDomain = parqueaderoAssembler.toDomain(sedeEntityTmp.getParqueadero());
+		var ciudadDomain = ciudadAssembler.toDomain(sedeEntityTmp.getCiudad());
+		var tipoSedeDomain = tipoSedeAssembler.toDomain(sedeEntityTmp.getTipoSede());
+		var paisDomain = paisAssembler.toDomain(sedeEntityTmp.getPais());
+		var departamentoDomain = departamentoAssembler.toDomain(sedeEntityTmp.getDepartamento());
+		return SedeDomain.build(sedeEntityTmp.getId(), parqueaderoDomain, sedeEntityTmp.getNombre(), ciudadDomain,
+				sedeEntityTmp.getDireccion(), sedeEntityTmp.getCorreoElectronico(), sedeEntityTmp.getCeldasCarro(),
+				sedeEntityTmp.getCeldasMoto(), sedeEntityTmp.getCeldascamion(), tipoSedeDomain, paisDomain,
+				departamentoDomain);
 	}
 
 	@Override
 	public SedeEntity toEntity(SedeDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		var sedeDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, SedeDomain.build());
+		var parqueaderoEntity = parqueaderoAssembler.toEntity(sedeDomainTmp.getParqueadero());
+		var ciudadEntity = ciudadAssembler.toEntity(sedeDomainTmp.getCiudad());
+		var tipoSedeEntity = tipoSedeAssembler.toEntity(sedeDomainTmp.getTipoSede());
+		var paisEntity = paisAssembler.toEntity(sedeDomainTmp.getPais());
+		var departamentoEntity = departamentoAssembler.toEntity(sedeDomainTmp.getDepartamento());
+		return SedeEntity.build().setId(sedeDomainTmp.getId()).setParqueadero(parqueaderoEntity)
+				.setNombre(sedeDomainTmp.getNombre()).setCiudad(ciudadEntity).setDireccion(sedeDomainTmp.getDireccion())
+				.setCorreoElectronico(sedeDomainTmp.getCorreoElectronico())
+				.setCeldasCarro(sedeDomainTmp.getCeldasCarro()).setCeldasMoto(sedeDomainTmp.getCeldasMoto())
+				.setCeldascamion(sedeDomainTmp.getCeldascamion()).setTipoSede(tipoSedeEntity).setPais(paisEntity)
+				.setDepartamento(departamentoEntity);
 	}
 
 }

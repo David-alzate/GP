@@ -2,6 +2,7 @@ package co.com.park.gp.business.assembler.entity.impl;
 
 import co.com.park.gp.business.assembler.entity.AssemblerEntity;
 import co.com.park.gp.business.domain.PaisDomain;
+import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.entity.PaisEntity;
 
 public final class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEntity> {
@@ -18,14 +19,14 @@ public final class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, Pa
 
 	@Override
 	public final PaisDomain toDomain(final PaisEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+		var paisEntityTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, PaisEntity.build());
+		return PaisDomain.build(paisEntityTmp.getId(),paisEntityTmp.getNombre());
 	}
 
 	@Override
 	public final PaisEntity toEntity(final PaisDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		var paisDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, PaisDomain.build());
+		return PaisEntity.build().setId(paisDomainTmp.getId()).setNombre(paisDomainTmp.getNombre());
 	}
 
 }
