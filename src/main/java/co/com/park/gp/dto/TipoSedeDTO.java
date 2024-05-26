@@ -12,6 +12,8 @@ public final class TipoSedeDTO {
 
 	public TipoSedeDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public TipoSedeDTO(final UUID id,final String nombre) {

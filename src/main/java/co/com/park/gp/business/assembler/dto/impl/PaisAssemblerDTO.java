@@ -1,5 +1,8 @@
 package co.com.park.gp.business.assembler.dto.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.com.park.gp.business.assembler.dto.AssemblerDTO;
 import co.com.park.gp.business.domain.PaisDomain;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
@@ -27,6 +30,19 @@ public final class PaisAssemblerDTO implements AssemblerDTO<PaisDomain, PaisDTO>
 	public final PaisDTO toDto(final PaisDomain domain) {
 		var paisDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, PaisDomain.build());
 		return PaisDTO.build().setId(paisDomainTmp.getId()).setNombre(paisDomainTmp.getNombre());
+	}
+
+	@Override
+	public List<PaisDomain> toDomainCollection(List<PaisDTO> dtoCollection) {
+		var dtoCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(dtoCollection, new ArrayList<PaisDTO>());
+		return dtoCollectionTmp.stream().map(this::toDomain).toList();
+	}
+
+	@Override
+	public List<PaisDTO> toDTOCollection(List<PaisDomain> domainCollection) {
+		var domainCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(domainCollection,
+				new ArrayList<PaisDomain>());
+		return domainCollectionTmp.stream().map(this::toDto).toList();
 	}
 
 }

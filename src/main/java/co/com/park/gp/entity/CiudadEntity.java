@@ -13,7 +13,9 @@ public final class CiudadEntity {
 	private DepartamentoEntity departamento;
 
 	public CiudadEntity() {
-		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
+		setDepartamento(DepartamentoEntity.build());
 	}
 
 	public CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
@@ -25,7 +27,7 @@ public final class CiudadEntity {
 	public static final CiudadEntity build() {
 		return new CiudadEntity();
 	}
-	
+
 	public final CiudadEntity setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;

@@ -1,5 +1,8 @@
 package co.com.park.gp.business.assembler.entity.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.com.park.gp.business.assembler.entity.AssemblerEntity;
 import co.com.park.gp.business.domain.ParqueaderoDomain;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
@@ -20,13 +23,28 @@ public class ParqueaderoAssemblerEntity implements AssemblerEntity<ParqueaderoDo
 	@Override
 	public ParqueaderoDomain toDomain(ParqueaderoEntity data) {
 		var parqueaderoEntityTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, ParqueaderoEntity.build());
-		return ParqueaderoDomain.build(parqueaderoEntityTmp.getId(),parqueaderoEntityTmp.getNombre());
+		return ParqueaderoDomain.build(parqueaderoEntityTmp.getId(), parqueaderoEntityTmp.getNombre());
 	}
 
 	@Override
 	public ParqueaderoEntity toEntity(ParqueaderoDomain domain) {
 		var parqueaderoDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, ParqueaderoDomain.build());
-		return ParqueaderoEntity.build().setId(parqueaderoDomainTmp.getId()).setNombre(parqueaderoDomainTmp.getNombre());
+		return ParqueaderoEntity.build().setId(parqueaderoDomainTmp.getId())
+				.setNombre(parqueaderoDomainTmp.getNombre());
+	}
+
+	@Override
+	public List<ParqueaderoDomain> toDomainCollection(List<ParqueaderoEntity> entityCollection) {
+		var entityCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(entityCollection,
+				new ArrayList<ParqueaderoEntity>());
+		return entityCollectionTmp.stream().map(this::toDomain).toList();
+	}
+
+	@Override
+	public List<ParqueaderoEntity> toEntityCollection(List<ParqueaderoDomain> domainCollection) {
+		var domainCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(domainCollection,
+				new ArrayList<ParqueaderoDomain>());
+		return domainCollectionTmp.stream().map(this::toEntity).toList();
 	}
 
 }

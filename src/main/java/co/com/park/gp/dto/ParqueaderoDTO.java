@@ -12,6 +12,8 @@ public final class ParqueaderoDTO {
 
 	public ParqueaderoDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public ParqueaderoDTO(final UUID id, final String nombre) {

@@ -23,6 +23,18 @@ public final class SedeDTO {
 
 	public SedeDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setParqueadero(ParqueaderoDTO.build());
+		setNombre(TextHelper.EMPTY);
+		setCiudad(CiudadDTO.build());
+		setDireccion(TextHelper.EMPTY);
+		setCorreoElectronico(TextHelper.EMPTY);
+		setCeldasCarro(0);
+		setCeldasMoto(0);
+		setCeldascamion(0);
+		setTipoSede(TipoSedeDTO.build());
+		setPais(PaisDTO.build());
+		setDepartamento(DepartamentoDTO.build());
 	}
 
 	public SedeDTO(final UUID id, final ParqueaderoDTO parqueadero, final String nombre, final CiudadDTO ciudad,
@@ -42,7 +54,7 @@ public final class SedeDTO {
 		setPais(pais);
 		setDepartamento(departamento);
 	}
-	
+
 	public static final SedeDTO build() {
 		return new SedeDTO();
 	}

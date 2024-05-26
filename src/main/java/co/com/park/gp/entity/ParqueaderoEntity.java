@@ -11,7 +11,8 @@ public final class ParqueaderoEntity {
 	private String nombre;
 
 	public ParqueaderoEntity() {
-		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public ParqueaderoEntity(final UUID id, final String nombre) {

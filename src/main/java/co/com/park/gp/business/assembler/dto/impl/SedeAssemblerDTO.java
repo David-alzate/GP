@@ -1,5 +1,8 @@
 package co.com.park.gp.business.assembler.dto.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.com.park.gp.business.assembler.dto.AssemblerDTO;
 import co.com.park.gp.business.domain.CiudadDomain;
 import co.com.park.gp.business.domain.DepartamentoDomain;
@@ -64,6 +67,19 @@ public class SedeAssemblerDTO implements AssemblerDTO<SedeDomain, SedeDTO> {
 				.setCeldasCarro(sedeDomainTmp.getCeldasCarro()).setCeldasMoto(sedeDomainTmp.getCeldasMoto())
 				.setCeldascamion(sedeDomainTmp.getCeldascamion()).setTipoSede(tipoSedeDto).setPais(paisDto)
 				.setDepartamento(departamentoDto);
+	}
+
+	@Override
+	public List<SedeDomain> toDomainCollection(List<SedeDTO> dtoCollection) {
+		var dtoCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(dtoCollection, new ArrayList<SedeDTO>());
+		return dtoCollectionTmp.stream().map(this::toDomain).toList();
+	}
+
+	@Override
+	public List<SedeDTO> toDTOCollection(List<SedeDomain> domainCollection) {
+		var domainCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(domainCollection,
+				new ArrayList<SedeDomain>());
+		return domainCollectionTmp.stream().map(this::toDto).toList();
 	}
 
 }

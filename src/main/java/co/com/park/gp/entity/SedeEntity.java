@@ -22,12 +22,23 @@ public final class SedeEntity {
 	private DepartamentoEntity departamento;
 
 	public SedeEntity() {
-		super();
+		setId(UUIDHelper.getDefault());
+		setParqueadero(ParqueaderoEntity.build());
+		setNombre(TextHelper.EMPTY);
+		setCiudad(CiudadEntity.build());
+		setDireccion(TextHelper.EMPTY);
+		setCorreoElectronico(TextHelper.EMPTY);
+		setCeldasCarro(0);
+		setCeldasMoto(0);
+		setCeldascamion(0);
+		setTipoSede(TipoSedeEntity.build());
+		setPais(PaisEntity.build());
+		setDepartamento(DepartamentoEntity.build());
 	}
 
-	public SedeEntity(final UUID id, final ParqueaderoEntity parqueadero, final String nombre, final CiudadEntity ciudad,
-			final String direccion, final String correoElectronico, final int celdasCarro, final int celdasMoto,
-			final int celdascamion, final TipoSedeEntity tipoSede, final PaisEntity pais,
+	public SedeEntity(final UUID id, final ParqueaderoEntity parqueadero, final String nombre,
+			final CiudadEntity ciudad, final String direccion, final String correoElectronico, final int celdasCarro,
+			final int celdasMoto, final int celdascamion, final TipoSedeEntity tipoSede, final PaisEntity pais,
 			final DepartamentoEntity departamento) {
 		setId(id);
 		setParqueadero(parqueadero);
@@ -42,7 +53,7 @@ public final class SedeEntity {
 		setPais(pais);
 		setDepartamento(departamento);
 	}
-	
+
 	public static final SedeEntity build() {
 		return new SedeEntity();
 	}

@@ -12,7 +12,8 @@ public final class PaisEntity {
 	private String nombre;
 
 	public PaisEntity() {
-		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public PaisEntity(final UUID id, final String nombre) {

@@ -13,6 +13,8 @@ public final class PaisDTO {
 
 	public PaisDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public PaisDTO(final UUID id, final String nombre) {

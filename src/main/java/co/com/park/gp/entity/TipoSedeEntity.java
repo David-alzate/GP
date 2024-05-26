@@ -11,7 +11,8 @@ public final class TipoSedeEntity {
 	private String nombre;
 
 	public TipoSedeEntity() {
-		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
 	}
 
 	public TipoSedeEntity(final UUID id,final String nombre) {

@@ -1,5 +1,8 @@
 package co.com.park.gp.business.assembler.entity.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.com.park.gp.business.assembler.entity.AssemblerEntity;
 import co.com.park.gp.business.domain.CiudadDomain;
 import co.com.park.gp.business.domain.DepartamentoDomain;
@@ -65,6 +68,20 @@ public class SedeAssemblerEntity implements AssemblerEntity<SedeDomain, SedeEnti
 				.setCeldasCarro(sedeDomainTmp.getCeldasCarro()).setCeldasMoto(sedeDomainTmp.getCeldasMoto())
 				.setCeldascamion(sedeDomainTmp.getCeldascamion()).setTipoSede(tipoSedeEntity).setPais(paisEntity)
 				.setDepartamento(departamentoEntity);
+	}
+
+	@Override
+	public List<SedeDomain> toDomainCollection(List<SedeEntity> entityCollection) {
+		var entityCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(entityCollection,
+				new ArrayList<SedeEntity>());
+		return entityCollectionTmp.stream().map(this::toDomain).toList();
+	}
+
+	@Override
+	public List<SedeEntity> toEntityCollection(List<SedeDomain> domainCollection) {
+		var domainCollectionTmp = ObjectHelper.getObjectHelper().getDefaultValue(domainCollection,
+				new ArrayList<SedeDomain>());
+		return domainCollectionTmp.stream().map(this::toEntity).toList();
 	}
 
 }

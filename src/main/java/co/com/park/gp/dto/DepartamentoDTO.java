@@ -2,7 +2,6 @@ package co.com.park.gp.dto;
 
 import java.util.UUID;
 
-
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
@@ -15,6 +14,9 @@ public final class DepartamentoDTO {
 
 	public DepartamentoDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
+		setPais(PaisDTO.build());
 	}
 
 	public DepartamentoDTO(final UUID id, final String nombre, final PaisDTO pais) {
@@ -22,7 +24,7 @@ public final class DepartamentoDTO {
 		setNombre(nombre);
 		setPais(pais);
 	}
-	
+
 	public static final DepartamentoDTO build() {
 		return new DepartamentoDTO();
 	}

@@ -14,6 +14,9 @@ public final class CiudadDTO {
 
 	public CiudadDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
+		setDepartamento(DepartamentoDTO.build());
 	}
 
 	public CiudadDTO(final UUID id, final String nombre, final DepartamentoDTO departamento) {
@@ -25,7 +28,7 @@ public final class CiudadDTO {
 	public static final CiudadDTO build() {
 		return new CiudadDTO();
 	}
-	
+
 	public final CiudadDTO setId(final UUID id) {
 		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
