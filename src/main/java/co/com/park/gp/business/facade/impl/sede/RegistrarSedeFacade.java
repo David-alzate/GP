@@ -2,7 +2,7 @@ package co.com.park.gp.business.facade.impl.sede;
 
 import co.com.park.gp.business.assembler.dto.impl.SedeAssemblerDTO;
 import co.com.park.gp.business.facade.FacadeWhitoutReturn;
-import co.com.park.gp.business.usecase.impl.sede.RegistrarSede;
+import co.com.park.gp.business.usecase.impl.sede.CrearSede;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
 import co.com.park.gp.data.dao.factory.DAOFactory;
@@ -21,7 +21,7 @@ public final class RegistrarSedeFacade implements FacadeWhitoutReturn<SedeDTO> {
         daoFactory.iniciarTransaccion();
         
         try {
-            var useCase = new RegistrarSede(daoFactory);
+            var useCase = new CrearSede(daoFactory);
             var sedeDomain = SedeAssemblerDTO.getInstance().toDomain(dto);
             
             useCase.execute(sedeDomain);
