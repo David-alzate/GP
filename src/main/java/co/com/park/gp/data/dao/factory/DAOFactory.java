@@ -10,7 +10,7 @@ import co.com.park.gp.data.dao.factory.concrete.PostgresqlDAOFactory;
 
 public interface DAOFactory {
 	
-	default DAOFactory getFactory() {
+	static DAOFactory getFactory() {
 		return new PostgresqlDAOFactory();
 	}
 	
@@ -34,6 +34,6 @@ public interface DAOFactory {
 	
 	SedeDAO getSedeDAO();
 	
-	TipoSedeDAO geTipoSedeDAO();
+	TipoSedeDAO getTipoSedeDAO();
 
 }

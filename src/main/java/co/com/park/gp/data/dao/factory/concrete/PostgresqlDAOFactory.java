@@ -87,7 +87,7 @@ public class PostgresqlDAOFactory extends SqlConnection implements DAOFactory {
 	}
 
 	@Override
-	public TipoSedeDAO geTipoSedeDAO() {
+	public TipoSedeDAO getTipoSedeDAO() {
 		return new TipoSedePostgresqlDAO(getConexion());
 	}
 
