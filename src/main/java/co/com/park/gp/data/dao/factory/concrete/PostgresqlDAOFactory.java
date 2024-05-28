@@ -3,6 +3,9 @@ package co.com.park.gp.data.dao.factory.concrete;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import co.com.park.gp.crosscutting.exceptions.custom.DataGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.SQLHelper;
 import co.com.park.gp.data.dao.entity.CiudadDAO;
 import co.com.park.gp.data.dao.entity.DepartamentoDAO;
@@ -19,24 +22,28 @@ import co.com.park.gp.data.dao.entity.concrete.postgresql.SedePostgresqlDAO;
 import co.com.park.gp.data.dao.entity.concrete.postgresql.TipoSedePostgresqlDAO;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 
-public class PostgresqlDAOFactory extends SqlConnection implements DAOFactory {
+public final class PostgresqlDAOFactory extends SqlConnection implements DAOFactory {
 
 	public PostgresqlDAOFactory() {
 		super();
 		abrirConexion();
 	}
 
-	@Override
-	public void abrirConexion() {
+	private void abrirConexion() {
+		final String connectionUrl = "jdbc:postgresql://localhost:5432/DOO?user=postgres&password=000";
 		try {
-			String conncectionString = "jbc://<server>:<port>...";
-			setConexion(DriverManager.getConnection(conncectionString));
-		} catch (final SQLException exception) {
-			// TODO: handle exception
-		} catch (Exception exception) {
+			setConexion(DriverManager.getConnection(connectionUrl));
+		} catch (final SQLException excepcion) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico = "Se ha presentado un problema tratando de obtener la conexión con la base de datos PostgreSQL. Por favor revise la traza de errores para identificar y solucionar el problema...";
 
+			throw new DataGPException(mensajeTecnico, mensajeUsuario, excepcion);
+		} catch (final Exception excepcion) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de obtener la conexión con la base de datos PostgreSQL. Por favor revise la traza de errores para identificar y solucionar el problema...";
+
+			throw new DataGPException(mensajeTecnico, mensajeUsuario, excepcion);
 		}
-
 	}
 
 	@Override
@@ -90,5 +97,4 @@ public class PostgresqlDAOFactory extends SqlConnection implements DAOFactory {
 	public TipoSedeDAO getTipoSedeDAO() {
 		return new TipoSedePostgresqlDAO(getConexion());
 	}
-
 }

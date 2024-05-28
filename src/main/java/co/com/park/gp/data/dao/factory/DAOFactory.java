@@ -13,8 +13,6 @@ public interface DAOFactory {
 	static DAOFactory getFactory() {
 		return new PostgresqlDAOFactory();
 	}
-	
-	void abrirConexion();
 
 	void cerrarConexion();
 

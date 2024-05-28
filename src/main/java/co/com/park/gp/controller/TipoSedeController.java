@@ -11,14 +11,9 @@ import co.com.park.gp.controller.response.TipoSedeResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.dto.TipoSedeDTO;
 @RestController
-@RequestMapping("api/v1/Tiposede")
+@RequestMapping("/tipoSedes/")
 public class TipoSedeController {
 	
-	@GetMapping("/dummy")
-	public TipoSedeDTO dummy() {
-		return TipoSedeDTO.build();
-	}
-
 	@GetMapping
 	public ResponseEntity<TipoSedeResponse> consultar(){
 		

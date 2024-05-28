@@ -12,14 +12,9 @@ import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.dto.PaisDTO;
 
 @RestController
-@RequestMapping("api/v1/paises")
+@RequestMapping("/paises/")
 public class PaisController {
 	
-	@GetMapping("/dummy")
-	public PaisDTO dummy() {
-		return PaisDTO.build();
-	}
-
 	@GetMapping
 	public ResponseEntity<PaisResponse> consultar(){
 		

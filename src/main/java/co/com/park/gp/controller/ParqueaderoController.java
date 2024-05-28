@@ -12,13 +12,8 @@ import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.dto.ParqueaderoDTO;
 
 @RestController
-@RequestMapping("api/v1/paises")
+@RequestMapping("/parqueaderos/")
 public class ParqueaderoController {
-	
-	@GetMapping("/dummy")
-	public ParqueaderoDTO dummy() {
-		return ParqueaderoDTO.build();
-	}
 
 	@GetMapping
 	public ResponseEntity<ParqueaderoResponse> consultar(){

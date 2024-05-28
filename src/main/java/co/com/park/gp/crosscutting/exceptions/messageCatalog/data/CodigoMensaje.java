@@ -3,9 +3,8 @@ package co.com.park.gp.crosscutting.exceptions.messageCatalog.data;
 import static co.com.park.gp.crosscutting.helpers.TextHelper.concatenate;
 import static co.com.park.gp.crosscutting.helpers.TextHelper.UNDERLINE;;
 
-
 public enum CodigoMensaje {
-	
+
 	M00001(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00001", true),
 	M00002(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00002", true),
 	M00003(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00003", true),
@@ -28,12 +27,12 @@ public enum CodigoMensaje {
 	M00020(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00020", true),
 	M00021(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00021", true),
 	M00022(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00022", true);
-	
+
 	private TipoMensaje tipo;
 	private CategoriaMensaje categoria;
 	private String codigo;
 	private boolean base;
-	
+
 	private CodigoMensaje(TipoMensaje tipo, CategoriaMensaje categoria, String codigo, boolean base) {
 		setTipo(tipo);
 		setCategoria(categoria);
@@ -41,7 +40,6 @@ public enum CodigoMensaje {
 		setBase(base);
 	}
 
-	
 	public final TipoMensaje getTipo() {
 		return tipo;
 	}
@@ -73,23 +71,9 @@ public enum CodigoMensaje {
 	private final void setBase(boolean base) {
 		this.base = base;
 	}
-	
+
 	public String getIdentificador() {
-		return concatenate(getTipo().name(),UNDERLINE,getCategoria().name(),
-				UNDERLINE,getCodigo());	
+		return concatenate(getTipo().name(), UNDERLINE, getCategoria().name(), UNDERLINE, getCodigo());
 	}
-				
-	
-	public static void main(String[] args) {
-	System.out.println(M00001.getIdentificador());
-	}
-				
-	
-	
-	
-	
-	
-	
-	
 
 }
