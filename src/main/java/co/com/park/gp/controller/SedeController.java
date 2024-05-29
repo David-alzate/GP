@@ -48,15 +48,15 @@ public class SedeController {
 	}
 
 	@PostMapping
-	public ResponseEntity<SedeResponse> crear(@RequestBody SedeDTO ciudad) {
+	public ResponseEntity<SedeResponse> crear(@RequestBody SedeDTO sede) {
 
 		var httpStatusCode = HttpStatus.ACCEPTED;
 		var ciudadResponse = new SedeResponse();
 
 		try {
 			var facade = new RegistrarSedeFacade();
-			facade.execute(ciudad);
-			ciudadResponse.getMensajes().add("ciudades creada exitosamente");
+			facade.execute(sede);
+			ciudadResponse.getMensajes().add("Sede creada exitosamente");
 
 		} catch (final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -65,7 +65,7 @@ public class SedeController {
 		} catch (final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-			var mensajeUsuario = "se ha presentado un prblema tratando de registar la nueva ciudad";
+			var mensajeUsuario = "se ha presentado un prblema tratando de registar la nueva Sede";
 			ciudadResponse.getMensajes().add(mensajeUsuario);
 
 			excepcion.printStackTrace();

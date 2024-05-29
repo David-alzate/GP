@@ -97,4 +97,5 @@ public final class PostgresqlDAOFactory extends SqlConnection implements DAOFact
 	public TipoSedeDAO getTipoSedeDAO() {
 		return new TipoSedePostgresqlDAO(getConexion());
 	}
+
 }
