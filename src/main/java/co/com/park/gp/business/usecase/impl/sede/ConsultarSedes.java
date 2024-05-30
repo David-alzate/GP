@@ -6,6 +6,8 @@ import co.com.park.gp.business.assembler.entity.impl.SedeAssemblerEntity;
 import co.com.park.gp.business.domain.SedeDomain;
 import co.com.park.gp.business.usecase.UseCaseWithReturn;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 
@@ -15,8 +17,8 @@ public class ConsultarSedes implements UseCaseWithReturn<SedeDomain, List<SedeDo
 
     public ConsultarSedes(final DAOFactory factory) {
         if(ObjectHelper.getObjectHelper().isNull(factory)) {
-            var mensajeUsuario = "Se ha presentado un problema tratando de llevar a cabo la consulta de las sedes...";
-            var mensajeTecnico = "El dao factory para consultar la sede llegó nulo...";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00036);
             throw new BusinessGPException(mensajeUsuario, mensajeTecnico);
         }
         

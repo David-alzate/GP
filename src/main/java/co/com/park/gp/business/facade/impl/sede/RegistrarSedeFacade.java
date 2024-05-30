@@ -5,6 +5,8 @@ import co.com.park.gp.business.facade.FacadeWhitoutReturn;
 import co.com.park.gp.business.usecase.impl.sede.RegistrarSede;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 import co.com.park.gp.dto.SedeDTO;
 
@@ -33,8 +35,8 @@ public final class RegistrarSedeFacade implements FacadeWhitoutReturn<SedeDTO> {
         } catch (Exception excepcion) {
             daoFactory.cancelarTransaccion();
 
-            var mensajeUsuario = "Se ha presentado un problema tratando de registrar la información de la sede.";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de registrar la información de la sede.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
 
             throw new BusinessGPException(mensajeTecnico, mensajeUsuario, excepcion);
         } finally {

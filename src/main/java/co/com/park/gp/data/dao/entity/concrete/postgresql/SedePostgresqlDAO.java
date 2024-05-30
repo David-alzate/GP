@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.park.gp.crosscutting.exceptions.custom.DataGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
@@ -53,13 +55,13 @@ public class SedePostgresqlDAO extends SqlConnection implements SedeDAO {
 			sentenciaSqlPreparada.executeUpdate();
 
 		} catch (final SQLException excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear la sede. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado una SQLException tratando de realizar el insert de la sede en la tabla \"Sede\" de la base de datos.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00045);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00052);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 
 		} catch (final Exception excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear la sede. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el insert de la sede en la tabla \"Sede\" de la base de datos.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00045);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00052);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 		}
 	}
@@ -153,13 +155,13 @@ public class SedePostgresqlDAO extends SqlConnection implements SedeDAO {
 			}
 
 		} catch (SQLException excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las sedes. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado una SQLException tratando de realizar la consulta de las sedes en la tabla 'Sede' de la base de datos.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00053);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 
 		} catch (Exception excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las sedes. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar la consulta de las sedes en la tabla 'Sede' de la base de datos.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00053);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 		}
 

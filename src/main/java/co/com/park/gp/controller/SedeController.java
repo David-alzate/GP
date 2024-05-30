@@ -12,6 +12,8 @@ import co.com.park.gp.business.facade.impl.sede.ConsultarSedeFacade;
 import co.com.park.gp.business.facade.impl.sede.RegistrarSedeFacade;
 import co.com.park.gp.controller.response.SedeResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.dto.SedeDTO;
 
 @RestController
@@ -29,7 +31,7 @@ public class SedeController {
 			var facade = new ConsultarSedeFacade();
 
 			sedeResponse.setDatos(facade.execute(sedeDto));
-			sedeResponse.getMensajes().add("sedes consultados exitosamente");
+			sedeResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00043));
 
 		} catch (final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -38,7 +40,7 @@ public class SedeController {
 		} catch (final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-			var mensajeUsuario = "se ha presentado un problema tratando de consultar";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
 			sedeResponse.getMensajes().add(mensajeUsuario);
 
 			excepcion.printStackTrace();

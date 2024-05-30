@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.park.gp.controller.response.CiudadResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.dto.CiudadDTO;
 import co.com.park.gp.dto.DepartamentoDTO;
 import co.com.park.gp.business.facade.impl.ciudad.ConsultarCiudadesFacade;
@@ -31,7 +33,7 @@ public final class CiudadController {
 			var facade = new ConsultarCiudadesFacade();
 			
 			ciudadResponse.setDatos(facade.execute(ciudadDto));
-			ciudadResponse.getMensajes().add("ciudades consultadas exitosamente");
+			ciudadResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00039));
 			
 		}catch(final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -40,7 +42,7 @@ public final class CiudadController {
 		}catch(final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 			
-			var mensajeUsuario = "se ha presentado un prblema tratando de consultar";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00023);
 			ciudadResponse.getMensajes().add(mensajeUsuario);
 			
 			excepcion.printStackTrace();

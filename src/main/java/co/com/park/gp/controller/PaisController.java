@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.park.gp.business.facade.impl.pais.ConsultarPaisesFacade;
 import co.com.park.gp.controller.response.PaisResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.dto.PaisDTO;
 
 @RestController
@@ -35,7 +37,7 @@ public class PaisController {
 		}catch(final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 			
-			var mensajeUsuario = "se ha presentado un problema tratando de consultar";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
 			paisResponse.getMensajes().add(mensajeUsuario);
 			
 			excepcion.printStackTrace();

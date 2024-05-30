@@ -7,6 +7,8 @@ import co.com.park.gp.business.facade.FacadeWhitReturn;
 import co.com.park.gp.business.usecase.impl.sede.ConsultarSedes;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 import co.com.park.gp.dto.SedeDTO;
 
@@ -33,8 +35,8 @@ public class ConsultarSedeFacade implements FacadeWhitReturn<SedeDTO, List<SedeD
             throw exception;
         } catch (final Exception exception) {
 
-            var mensajeUsuario = "Se ha presentado un problema al consultar la información de las sedes";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar las sedes";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00031);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00032);
 
             throw new BusinessGPException(mensajeTecnico, mensajeUsuario, exception);
 

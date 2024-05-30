@@ -10,6 +10,8 @@ import co.com.park.gp.business.assembler.entity.impl.TipoSedeAssemblerEntity;
 import co.com.park.gp.business.domain.SedeDomain;
 import co.com.park.gp.business.usecase.UseCaseWithoutReturn;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 import co.com.park.gp.data.dao.factory.DAOFactory;
@@ -21,8 +23,8 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
 	public RegistrarSede(final DAOFactory factory) {
 		if (ObjectHelper.getObjectHelper().isNull(factory)) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de llevar un registro de la sede...";
-			var mensajeTecnico = "El DAO factory para crear la sede llegó nulo...";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00045);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00046);
 			throw new BusinessGPException(mensajeUsuario, mensajeTecnico);
 		}
 

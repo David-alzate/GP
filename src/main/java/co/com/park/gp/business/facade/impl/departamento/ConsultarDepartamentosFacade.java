@@ -7,6 +7,8 @@ import co.com.park.gp.business.facade.FacadeWhitReturn;
 import co.com.park.gp.business.usecase.impl.departamento.ConsultarDepartamentos;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 import co.com.park.gp.dto.DepartamentoDTO;
 
@@ -29,8 +31,8 @@ public class ConsultarDepartamentosFacade implements FacadeWhitReturn<Departamen
         } catch (final GPException exception) {
             throw exception;
         } catch (final Exception exception) {
-            var mensajeUsuario = "Se ha presentado un problema al consultar la información del departamento";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar el departamento";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00026);
             throw new BusinessGPException(mensajeTecnico, mensajeUsuario, exception);
         } finally {
             daoFactory.cerrarConexion();

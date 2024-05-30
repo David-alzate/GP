@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.park.gp.crosscutting.exceptions.custom.DataGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
@@ -79,13 +81,13 @@ public class CiudadPostgresqlDAO extends SqlConnection implements CiudadDAO {
 			}
 
 		} catch (final SQLException excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado una SQLException tratando de realizar la consulta de las ciudades en la tabla \"Ciudad\" de la base de datos Azure SQL.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00023);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00048);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 
 		} catch (final Exception excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar la consulta de las ciudades en la tabla \"Ciudad\" de la base de datos Azure SQL.";
+			var mensajeUsuario =MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00023);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00048);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 		}
 

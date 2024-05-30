@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.park.gp.business.facade.impl.tiposede.ConsultarTipoSedeFacade;
 import co.com.park.gp.controller.response.TipoSedeResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.dto.TipoSedeDTO;
 @RestController
 @RequestMapping("/tipoSedes/")
@@ -25,7 +27,7 @@ public class TipoSedeController {
 			var facade = new ConsultarTipoSedeFacade();
 			
 			tipoSedeResponse.setDatos(facade.execute(tipoSedeDto));
-			tipoSedeResponse.getMensajes().add("tipoSedes consultadas exitosamente");
+			tipoSedeResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00044));
 			
 		}catch(final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -34,7 +36,7 @@ public class TipoSedeController {
 		}catch(final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 			
-			var mensajeUsuario = "se ha presentado un problema tratando de consultar";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033);
 			tipoSedeResponse.getMensajes().add(mensajeUsuario);
 			
 			excepcion.printStackTrace();

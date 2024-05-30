@@ -7,6 +7,8 @@ import co.com.park.gp.business.facade.FacadeWhitReturn;
 import co.com.park.gp.business.usecase.impl.pais.ConsultarPaises;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 import co.com.park.gp.dto.PaisDTO;
 
@@ -28,8 +30,8 @@ public class ConsultarPaisesFacade implements FacadeWhitReturn<PaisDTO, List<Pai
         } catch (GPException exception) {
             throw exception;
         } catch (Exception exception) {
-            var mensajeUsuario = "Se ha presentado un problema al consultar la información de los países.";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar los países.";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00028);
             throw new BusinessGPException(mensajeUsuario, mensajeTecnico, exception);
         } finally {
             daoFactory.cerrarConexion();

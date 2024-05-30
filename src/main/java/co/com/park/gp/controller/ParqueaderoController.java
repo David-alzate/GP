@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.park.gp.business.facade.impl.parqueadero.ConsultarParqueaderosFacade;
 import co.com.park.gp.controller.response.ParqueaderoResponse;
 import co.com.park.gp.crosscutting.exceptions.GPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.dto.ParqueaderoDTO;
 
 @RestController
@@ -26,7 +28,7 @@ public class ParqueaderoController {
 			var facade = new ConsultarParqueaderosFacade();
 			
 			parqueaderoResponse.setDatos(facade.execute(parqueaderoDto));
-			parqueaderoResponse.getMensajes().add("parqueaderos consultados exitosamente");
+			parqueaderoResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00042));
 			
 		}catch(final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -35,7 +37,7 @@ public class ParqueaderoController {
 		}catch(final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 			
-			var mensajeUsuario = "se ha presentado un problema tratando de consultar";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
 			parqueaderoResponse.getMensajes().add(mensajeUsuario);
 			
 			excepcion.printStackTrace();

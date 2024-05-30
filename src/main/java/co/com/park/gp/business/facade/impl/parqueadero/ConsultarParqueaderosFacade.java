@@ -7,6 +7,8 @@ import co.com.park.gp.business.facade.FacadeWhitReturn;
 import co.com.park.gp.business.usecase.impl.parqueadero.ConsultarParqueaderos;
 import co.com.park.gp.crosscutting.exceptions.GPException;
 import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.data.dao.factory.DAOFactory;
 import co.com.park.gp.dto.ParqueaderoDTO;
 
@@ -32,8 +34,8 @@ public class ConsultarParqueaderosFacade implements FacadeWhitReturn<Parqueadero
         } catch (final GPException exception) {
             throw exception;
         } catch (final Exception exception) {
-            var mensajeUsuario = "Se ha presentado un problema al consultar la información del parqueadero";
-            var mensajeTecnico = "Se ha presentado un problema INESPERADO tratando de consultar los parqueaderos";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
+            var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
             
             throw new BusinessGPException(mensajeTecnico, mensajeUsuario, exception);
             } finally {

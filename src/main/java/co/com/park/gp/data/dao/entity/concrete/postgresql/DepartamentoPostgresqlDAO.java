@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.park.gp.crosscutting.exceptions.custom.DataGPException;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
+import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
@@ -71,13 +73,13 @@ public class DepartamentoPostgresqlDAO extends SqlConnection implements Departam
 			}
 
 		} catch (final SQLException excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar los departamentos. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado una SQLException tratando de realizar la consulta de los departamentos en la tabla \"Departamento\" de la base de datos.";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00049);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 
 		} catch (final Exception excepcion) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de consultar los departamentos. Por favor, contacte al administrador del sistema.";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar la consulta de los departamentos en la tabla \"Departamento\" de la base de datos.";
+			var mensajeUsuario =  MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00025);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00049);
 			throw new DataGPException(mensajeUsuario, mensajeTecnico, excepcion);
 		}
 
