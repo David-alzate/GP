@@ -13,8 +13,10 @@ import co.com.park.gp.crosscutting.exceptions.custom.BusinessGPException;
 import co.com.park.gp.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
 import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
+import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 import co.com.park.gp.data.dao.factory.DAOFactory;
+import co.com.park.gp.entity.ParqueaderoEntity;
 import co.com.park.gp.entity.SedeEntity;
 
 public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
@@ -36,8 +38,10 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
 		// Verificar que los datos de la sede sean completos y válidos antes de crearla
 		// en el sistema.
+		validarFormatoCorreo(data.getCorreoElectronico());
 
 		// No debe existir otro sede con el mismo nombre dentro de un mismo parqueadero
+		validarSedeMismoNombreMismoParqueaero(data.getNombre(), data.getParqueadero().getId());
 
 		// No puede existir mas de una sede con el mismo correo
 
@@ -67,6 +71,39 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			existeId = !resultados.isEmpty();
 		}
 		return id;
+	}
+
+	private void validarSedeMismoNombreMismoParqueaero(final String nombreSede, final UUID idParqueadero) {
+		var sedeEntity = SedeEntity.build().setNombre(nombreSede)
+				.setParqueadero(ParqueaderoEntity.build().setId(idParqueadero));
+
+		if (TextHelper.isNullOrEmpty(nombreSede)) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056), nombreSede);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+	}
+
+	private void validarFormatoCorreo(final String correo) {
+
+		if (TextHelper.isNullOrEmpty(correo)) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00058);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+		if (!correo.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00059), correo);
+			throw new BusinessGPException(mensajeUsuario);
+		}
 	}
 
 }

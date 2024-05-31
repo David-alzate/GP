@@ -10,8 +10,8 @@ import co.com.park.gp.crosscutting.exceptions.messageCatalog.data.Mensaje;
 import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 
 public class MessageCatalogBase implements MessageCatalog {
-	
-	private final Map<String,Mensaje> mensajes = new HashMap<>();
+
+	private final Map<String, Mensaje> mensajes = new HashMap<>();
 
 	@Override
 	public void inicializar() {
@@ -54,7 +54,7 @@ public class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema tratando de cancelar una transacción SQL con la fuente de información deseada..."));
 		mensajes.put(CodigoMensaje.M00019.getIdentificador(), new Mensaje(CodigoMensaje.M00019,
 				"Se ha presentado un problema INESPERADO tratando de cancelar una transacción SQL con la fuente de información deseada..."));
- 
+
 		mensajes.put(CodigoMensaje.M00020.getIdentificador(), new Mensaje(CodigoMensaje.M00020,
 				"Se ha intentado iniciar una transacción con una conexión SQL cerrada..."));
 		mensajes.put(CodigoMensaje.M00021.getIdentificador(), new Mensaje(CodigoMensaje.M00022,
@@ -74,7 +74,7 @@ public class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00028.getIdentificador(), new Mensaje(CodigoMensaje.M00028,
 				"Se ha presentado un problema INESPERADO tratando de consultar los países."));
 		mensajes.put(CodigoMensaje.M00029.getIdentificador(), new Mensaje(CodigoMensaje.M00029,
-				 "Se ha presentado un problema al consultar la información del parqueadero"));
+				"Se ha presentado un problema al consultar la información del parqueadero"));
 		mensajes.put(CodigoMensaje.M00030.getIdentificador(), new Mensaje(CodigoMensaje.M00030,
 				"Se ha presentado un problema INESPERADO tratando de consultar los parqueaderos"));
 		mensajes.put(CodigoMensaje.M00031.getIdentificador(), new Mensaje(CodigoMensaje.M00031,
@@ -87,30 +87,30 @@ public class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado un problema INESPERADO tratando de registrar la información de la sede."));
 		mensajes.put(CodigoMensaje.M00035.getIdentificador(), new Mensaje(CodigoMensaje.M00035,
 				"Se ha presentado un problema tratando de llevar a cabo la consulta de las sedes..."));
-		mensajes.put(CodigoMensaje.M00036.getIdentificador(), new Mensaje(CodigoMensaje.M00036,
-				"El dao factory para consultar la sede llegó nulo..."));
+		mensajes.put(CodigoMensaje.M00036.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00036, "El dao factory para consultar la sede llegó nulo..."));
 		mensajes.put(CodigoMensaje.M00037.getIdentificador(), new Mensaje(CodigoMensaje.M00037,
-				 "Se ha presentado un problema tratando de llevar a cabo la consulta de los tipos de sede..."));
-		mensajes.put(CodigoMensaje.M00038.getIdentificador(), new Mensaje(CodigoMensaje.M00038,
-				"El dao factory para consultar el tipo de sede llegó nulo..."));
-		mensajes.put(CodigoMensaje.M00039.getIdentificador(), new Mensaje(CodigoMensaje.M00039,
-				"ciudades consultadas exitosamente"));
-		mensajes.put(CodigoMensaje.M00040.getIdentificador(), new Mensaje(CodigoMensaje.M00040,
-				"departamentos consultados exitosamente"));
-		mensajes.put(CodigoMensaje.M00041.getIdentificador(), new Mensaje(CodigoMensaje.M00041,
-				"paises consultados exitosamente"));
-		mensajes.put(CodigoMensaje.M00042.getIdentificador(), new Mensaje(CodigoMensaje.M00042,
-				"parqueaderos consultados exitosamente"));
-		mensajes.put(CodigoMensaje.M00043.getIdentificador(), new Mensaje(CodigoMensaje.M00043,
-				"sedes consultados exitosamente"));
-		mensajes.put(CodigoMensaje.M00044.getIdentificador(), new Mensaje(CodigoMensaje.M00044,
-				"tipoSedes consultadas exitosamente"));
+				"Se ha presentado un problema tratando de llevar a cabo la consulta de los tipos de sede..."));
+		mensajes.put(CodigoMensaje.M00038.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00038, "El dao factory para consultar el tipo de sede llegó nulo..."));
+		mensajes.put(CodigoMensaje.M00039.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00039, "ciudades consultadas exitosamente"));
+		mensajes.put(CodigoMensaje.M00040.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00040, "departamentos consultados exitosamente"));
+		mensajes.put(CodigoMensaje.M00041.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00041, "paises consultados exitosamente"));
+		mensajes.put(CodigoMensaje.M00042.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00042, "parqueaderos consultados exitosamente"));
+		mensajes.put(CodigoMensaje.M00043.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00043, "sedes consultados exitosamente"));
+		mensajes.put(CodigoMensaje.M00044.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00044, "tipoSedes consultadas exitosamente"));
 		mensajes.put(CodigoMensaje.M00045.getIdentificador(), new Mensaje(CodigoMensaje.M00045,
 				"Se ha presentado un problema tratando de llevar un registro de la sede..."));
-		mensajes.put(CodigoMensaje.M00046.getIdentificador(), new Mensaje(CodigoMensaje.M00046,
-				"El DAO factory para crear la sede llegó nulo..."));
-		mensajes.put(CodigoMensaje.M00047.getIdentificador(), new Mensaje(CodigoMensaje.M00047,
-				"No es posible crear el DAO deseado con una conexion cerrada"));
+		mensajes.put(CodigoMensaje.M00046.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00046, "El DAO factory para crear la sede llegó nulo..."));
+		mensajes.put(CodigoMensaje.M00047.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00047, "No es posible crear el DAO deseado con una conexion cerrada"));
 		mensajes.put(CodigoMensaje.M00048.getIdentificador(), new Mensaje(CodigoMensaje.M00048,
 				"Se ha presentado una SQLException tratando de realizar la consulta de las ciudades en la tabla \"Ciudad\" de la base de datos PostgresSQL"));
 		mensajes.put(CodigoMensaje.M00049.getIdentificador(), new Mensaje(CodigoMensaje.M00049,
@@ -118,7 +118,7 @@ public class MessageCatalogBase implements MessageCatalog {
 		mensajes.put(CodigoMensaje.M00050.getIdentificador(), new Mensaje(CodigoMensaje.M00050,
 				"Se ha presentado una SQLException tratando de realizar la consulta de los países en la tabla \"Pais\" de la base de datos."));
 		mensajes.put(CodigoMensaje.M00051.getIdentificador(), new Mensaje(CodigoMensaje.M00051,
-				 "Se ha presentado una SQLException tratando de realizar la consulta de los parqueaderos en la tabla \"Parqueadero\" de la base de datos."));
+				"Se ha presentado una SQLException tratando de realizar la consulta de los parqueaderos en la tabla \"Parqueadero\" de la base de datos."));
 		mensajes.put(CodigoMensaje.M00052.getIdentificador(), new Mensaje(CodigoMensaje.M00052,
 				"Se ha presentado una SQLException tratando de realizar el insert de la sede en la tabla \"Sede\" de la base de datos."));
 		mensajes.put(CodigoMensaje.M00053.getIdentificador(), new Mensaje(CodigoMensaje.M00053,
@@ -127,10 +127,16 @@ public class MessageCatalogBase implements MessageCatalog {
 				"Se ha presentado una SQLException tratando de realizar la consulta de los tipos de sede en la tabla \"TipoSede\" de la base de datos."));
 		mensajes.put(CodigoMensaje.M00055.getIdentificador(), new Mensaje(CodigoMensaje.M00055,
 				"Se ha presentado un problema tratando de obtener la conexión con la base de datos PostgreSQL. Por favor revise la traza de errores para identificar y solucionar el problema..."));
-	
+		mensajes.put(CodigoMensaje.M00056.getIdentificador(), new Mensaje(CodigoMensaje.M00056,
+				"Ya existe una sede con el nombre \"${1}\" asociado al parqueadero deseado"));
+		mensajes.put(CodigoMensaje.M00057.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00057, "El capo Nombre Sede no puede estar vacio"));
+		mensajes.put(CodigoMensaje.M00058.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00058, "El campo Correo no puede estar vacio"));
+		mensajes.put(CodigoMensaje.M00059.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00059, "El formato del correo \"${1}\" no es valido"));
+
 	}
-		
-	
 
 	@Override
 	public String obtenerContenidoMensaje(CodigoMensaje codigo, String... parametros) {
@@ -144,16 +150,16 @@ public class MessageCatalogBase implements MessageCatalog {
 			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00001);
 			throw new CroscuttingGPException(mensajeTecnico, mensajeUsuario);
 		}
-		
+
 		if (!codigo.isBase()) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00004,codigo.getIdentificador());
+			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00004, codigo.getIdentificador());
 			throw new CroscuttingGPException(mensajeTecnico, mensajeUsuario);
 		}
-		
+
 		if (!mensajes.containsKey(codigo.getIdentificador())) {
 			var mensajeUsuario = obtenerContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003,codigo.getIdentificador());
+			var mensajeTecnico = obtenerContenidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
 			throw new CroscuttingGPException(mensajeTecnico, mensajeUsuario);
 		}
 		return mensajes.get(codigo.getIdentificador());
