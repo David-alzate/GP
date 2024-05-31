@@ -2,6 +2,7 @@ package co.com.park.gp.business.usecase.impl.sede;
 
 import java.util.UUID;
 
+
 import co.com.park.gp.business.assembler.entity.impl.CiudadAssemblerEntity;
 import co.com.park.gp.business.assembler.entity.impl.DepartamentoAssemblerEntity;
 import co.com.park.gp.business.assembler.entity.impl.PaisAssemblerEntity;
@@ -48,6 +49,9 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
 		// No puede existir una sede con la misma direccion dentro del mismo parqueadero
 		validarSedeMismaDireccionMismoParqueadero(data.getDireccion(), data.getParqueadero().getId());
+		
+		// No pueden ingresar cantidades negativas y la sumatoria de las cantidades de celdas no puede ser igual a cero
+		validarCantidadCeldas(data.getCeldasCarro(), data.getCeldasMoto(), data.getCeldascamion());
 
 		var sedeEntity = SedeEntity.build().setId(generarIdentificadorSede())
 				.setParqueadero(ParqueaderoAssemblerEntity.getInstance().toEntity(data.getParqueadero()))
@@ -135,5 +139,28 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 	}
-
+	
+	private void validarCantidadCeldas(final int celdasCarro, final int celdasMoto, final int celdasCamion) {
+		if(celdasCarro < 0 ){
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCarro");
+			throw new BusinessGPException(mensajeUsuario);
+		}
+		if(celdasMoto < 0) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasMoto");
+			throw new BusinessGPException(mensajeUsuario);
+		}
+		
+		if(celdasCamion < 0) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCamion");
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	    if (celdasCarro + celdasMoto + celdasCamion == 0) {
+	        var mensajeUsuario = TextHelper
+	                .reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00064), "celdasCarro" , "celdasMoto" , "celdasCamion");
+	        throw new BusinessGPException(mensajeUsuario);
+	    }
+	}
 }

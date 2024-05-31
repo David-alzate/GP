@@ -141,6 +141,11 @@ public class MessageCatalogBase implements MessageCatalog {
 				new Mensaje(CodigoMensaje.M00061,"El campo Direccion no puede estar vacio"));
 		mensajes.put(CodigoMensaje.M00062.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00062," Ya existe una sede con la direccion \"${1}\" asociado al parqueadero asociado"));
+		mensajes.put(CodigoMensaje.M00063.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00063, "La cantidad de \"${1}\" no puede ser negativa."));
+		mensajes.put(CodigoMensaje.M00064.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00064, "Debe haber al menos una cantidad para \"${1}\" o para \"${2}\" o para \"${3}\", para poder crear la sede"));
+
 	}
 
 	@Override
