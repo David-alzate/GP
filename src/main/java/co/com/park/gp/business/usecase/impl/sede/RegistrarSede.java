@@ -2,7 +2,6 @@ package co.com.park.gp.business.usecase.impl.sede;
 
 import java.util.UUID;
 
-
 import co.com.park.gp.business.assembler.entity.impl.CiudadAssemblerEntity;
 import co.com.park.gp.business.assembler.entity.impl.DepartamentoAssemblerEntity;
 import co.com.park.gp.business.assembler.entity.impl.PaisAssemblerEntity;
@@ -36,21 +35,19 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
 	@Override
 	public void execute(final SedeDomain data) {
-
-		// Verificar que los datos de la sede sean completos y válidos antes de crearla
-		// en el sistema.
+		
+		validarSede(data.getNombre());
+		
 		validarFormatoCorreo(data.getCorreoElectronico());
+		
+		validarDireccion(data.getDireccion());
 
-		// No debe existir otro sede con el mismo nombre dentro de un mismo parqueadero
 		validarSedeMismoNombreMismoParqueaero(data.getNombre(), data.getParqueadero().getId());
 
-		// No puede existir mas de una sede con el mismo correo
 		validarMismoCorreo(data.getCorreoElectronico());
 
-		// No puede existir una sede con la misma direccion dentro del mismo parqueadero
 		validarSedeMismaDireccionMismoParqueadero(data.getDireccion(), data.getParqueadero().getId());
-		
-		// No pueden ingresar cantidades negativas y la sumatoria de las cantidades de celdas no puede ser igual a cero
+
 		validarCantidadCeldas(data.getCeldasCarro(), data.getCeldasMoto(), data.getCeldascamion());
 
 		var sedeEntity = SedeEntity.build().setId(generarIdentificadorSede())
@@ -79,55 +76,26 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 		return id;
 	}
 
-	private void validarSedeMismoNombreMismoParqueaero(final String nombreSede, final UUID idParqueadero) {
-		var sedeEntity = SedeEntity.build().setNombre(nombreSede)
-				.setParqueadero(ParqueaderoEntity.build().setId(idParqueadero));
-
+	private void validarSede(final String nombreSede) {
 		if (TextHelper.isNullOrEmpty(nombreSede)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00057);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		var resultados = factory.getSedeDAO().consultar(sedeEntity);
-
-		if (!resultados.isEmpty()) {
+		if (nombreSede.length() < 2) {
 			var mensajeUsuario = TextHelper
-					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056), nombreSede);
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00065), nombreSede);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-	}
-	
-	private void validarSedeMismaDireccionMismoParqueadero(final String direccion,final UUID idparqueadero) {
-		var sedeEntity = SedeEntity.build().setDireccion(direccion).setParqueadero(ParqueaderoEntity.build().setId(idparqueadero));
-		
-		if (TextHelper.isNullOrEmpty(direccion)) {
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00061);
+		if (nombreSede.length() > 40) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00066);
 			throw new BusinessGPException(mensajeUsuario);
 		}
-		
-		var resultados = factory.getSedeDAO().consultar(sedeEntity);
-		
-		if (!resultados.isEmpty()) {
-			var mensajeUsuario = TextHelper.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00062), direccion);
-			throw new BusinessGPException(mensajeUsuario);
-		}
-	}
-	
-	private void validarMismoCorreo(final String correo) {
-		var sedeEntity = SedeEntity.build().setCorreoElectronico(correo);
-		
-		var resultados = factory.getSedeDAO().consultar(sedeEntity);
-		
-		if (!resultados.isEmpty()) {
-			var mensajeUsuario = TextHelper
-					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00060),correo);
-			throw new BusinessGPException(mensajeUsuario);
-		}
+
 	}
 
 	private void validarFormatoCorreo(final String correo) {
-
 		if (TextHelper.isNullOrEmpty(correo)) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00058);
 			throw new BusinessGPException(mensajeUsuario);
@@ -139,28 +107,88 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 	}
-	
+
+	private void validarDireccion(final String direccion) {
+		if (TextHelper.isNullOrEmpty(direccion)) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00061);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+		if (direccion.length() < 5) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00067), direccion);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+		if (direccion.length() > 100) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00068);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+
 	private void validarCantidadCeldas(final int celdasCarro, final int celdasMoto, final int celdasCamion) {
-		if(celdasCarro < 0 ){
-			var mensajeUsuario = TextHelper
-					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCarro");
+		if (celdasCarro < 0) {
+			var mensajeUsuario = TextHelper.reemplazarParametro(
+					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCarro");
 			throw new BusinessGPException(mensajeUsuario);
 		}
-		if(celdasMoto < 0) {
-			var mensajeUsuario = TextHelper
-					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasMoto");
+
+		if (celdasMoto < 0) {
+			var mensajeUsuario = TextHelper.reemplazarParametro(
+					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasMoto");
 			throw new BusinessGPException(mensajeUsuario);
 		}
-		
-		if(celdasCamion < 0) {
-			var mensajeUsuario = TextHelper
-					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCamion");
+
+		if (celdasCamion < 0) {
+			var mensajeUsuario = TextHelper.reemplazarParametro(
+					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCamion");
 			throw new BusinessGPException(mensajeUsuario);
 		}
-	    if (celdasCarro + celdasMoto + celdasCamion == 0) {
-	        var mensajeUsuario = TextHelper
-	                .reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00064), "celdasCarro" , "celdasMoto" , "celdasCamion");
-	        throw new BusinessGPException(mensajeUsuario);
-	    }
+
+		if (celdasCarro + celdasMoto + celdasCamion == 0) {
+			var mensajeUsuario = TextHelper.reemplazarParametro(
+					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00064), "celdasCarro", "celdasMoto",
+					"celdasCamion");
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+
+	private void validarSedeMismoNombreMismoParqueaero(final String nombreSede, final UUID idParqueadero) {
+		var sedeEntity = SedeEntity.build().setNombre(nombreSede)
+				.setParqueadero(ParqueaderoEntity.build().setId(idParqueadero));
+
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00056), nombreSede);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+
+	}
+
+	private void validarSedeMismaDireccionMismoParqueadero(final String direccion, final UUID idparqueadero) {
+		var sedeEntity = SedeEntity.build().setDireccion(direccion)
+				.setParqueadero(ParqueaderoEntity.build().setId(idparqueadero));
+
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00062), direccion);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+
+	private void validarMismoCorreo(final String correo) {
+		var sedeEntity = SedeEntity.build().setCorreoElectronico(correo);
+
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00060), correo);
+			throw new BusinessGPException(mensajeUsuario);
+		}
 	}
 }

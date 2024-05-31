@@ -135,16 +135,24 @@ public class MessageCatalogBase implements MessageCatalog {
 				new Mensaje(CodigoMensaje.M00058, "El campo Correo no puede estar vacio"));
 		mensajes.put(CodigoMensaje.M00059.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00059, "El formato del correo \"${1}\" no es valido"));
-		mensajes.put(CodigoMensaje.M00060.getIdentificador(),
-				new Mensaje(CodigoMensaje.M00060,"no puede existir un mismo correo \"${1}\" por favor intenta con otro"));
+		mensajes.put(CodigoMensaje.M00060.getIdentificador(), new Mensaje(CodigoMensaje.M00060,
+				"El correo \"${1}\" ya esta asignado para otra sede, por favor intenta con otro"));
 		mensajes.put(CodigoMensaje.M00061.getIdentificador(),
-				new Mensaje(CodigoMensaje.M00061,"El campo Direccion no puede estar vacio"));
-		mensajes.put(CodigoMensaje.M00062.getIdentificador(),
-				new Mensaje(CodigoMensaje.M00062," Ya existe una sede con la direccion \"${1}\" asociado al parqueadero asociado"));
+				new Mensaje(CodigoMensaje.M00061, "El campo Direccion no puede estar vacio"));
+		mensajes.put(CodigoMensaje.M00062.getIdentificador(), new Mensaje(CodigoMensaje.M00062,
+				" Ya existe una sede con la direccion \"${1}\" asociado al parqueadero deseado"));
 		mensajes.put(CodigoMensaje.M00063.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00063, "La cantidad de \"${1}\" no puede ser negativa."));
-		mensajes.put(CodigoMensaje.M00064.getIdentificador(),
-				new Mensaje(CodigoMensaje.M00064, "Debe haber al menos una cantidad para \"${1}\" o para \"${2}\" o para \"${3}\", para poder crear la sede"));
+		mensajes.put(CodigoMensaje.M00064.getIdentificador(), new Mensaje(CodigoMensaje.M00064,
+				"Debe haber al menos una cantidad para \"${1}\" o para \"${2}\" o para \"${3}\", para poder crear la sede"));
+		mensajes.put(CodigoMensaje.M00065.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00065, "El nombre \"${1}\" para la sede es demasiado corto"));
+		mensajes.put(CodigoMensaje.M00066.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00066, "El nombre de la sede es demasiado largo"));
+		mensajes.put(CodigoMensaje.M00067.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00067, "El nombre \"${1}\" para la direccion es demasiado corto"));
+		mensajes.put(CodigoMensaje.M00068.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00068, "El nombre de la direccion es demasiado largo"));
 
 	}
 
