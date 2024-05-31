@@ -135,7 +135,10 @@ public class MessageCatalogBase implements MessageCatalog {
 				new Mensaje(CodigoMensaje.M00058, "El campo Correo no puede estar vacio"));
 		mensajes.put(CodigoMensaje.M00059.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00059, "El formato del correo \"${1}\" no es valido"));
-
+		mensajes.put(CodigoMensaje.M00060.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00060, "La cantidad de \"${1}\" no puede ser negativa."));
+		mensajes.put(CodigoMensaje.M00061.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00061, "Debe haber al menos una cantidad para \"${1}\" o para \"${2}\" o para \"${3}\", para poder crear la sede"));
 	}
 
 	@Override
