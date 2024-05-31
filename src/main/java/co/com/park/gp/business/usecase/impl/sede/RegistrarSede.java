@@ -44,8 +44,10 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 		validarSedeMismoNombreMismoParqueaero(data.getNombre(), data.getParqueadero().getId());
 
 		// No puede existir mas de una sede con el mismo correo
+		validarMismoCorreo(data.getCorreoElectronico());
 
 		// No puede existir una sede con la misma direccion dentro del mismo parqueadero
+		validarSedeMismaDireccionMismoParqueadero(data.getDireccion(), data.getParqueadero().getId());
 
 		var sedeEntity = SedeEntity.build().setId(generarIdentificadorSede())
 				.setParqueadero(ParqueaderoAssemblerEntity.getInstance().toEntity(data.getParqueadero()))
@@ -90,6 +92,34 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
+	}
+	
+	private void validarSedeMismaDireccionMismoParqueadero(final String direccion,final UUID idparqueadero) {
+		var sedeEntity = SedeEntity.build().setDireccion(direccion).setParqueadero(ParqueaderoEntity.build().setId(idparqueadero));
+		
+		if (TextHelper.isNullOrEmpty(direccion)) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00061);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+		
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+		
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00062), direccion);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	private void validarMismoCorreo(final String correo) {
+		var sedeEntity = SedeEntity.build().setCorreoElectronico(correo);
+		
+		var resultados = factory.getSedeDAO().consultar(sedeEntity);
+		
+		if (!resultados.isEmpty()) {
+			var mensajeUsuario = TextHelper
+					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00060),correo);
+			throw new BusinessGPException(mensajeUsuario);
+		}
 	}
 
 	private void validarFormatoCorreo(final String correo) {

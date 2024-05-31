@@ -135,7 +135,12 @@ public class MessageCatalogBase implements MessageCatalog {
 				new Mensaje(CodigoMensaje.M00058, "El campo Correo no puede estar vacio"));
 		mensajes.put(CodigoMensaje.M00059.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00059, "El formato del correo \"${1}\" no es valido"));
-
+		mensajes.put(CodigoMensaje.M00060.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00060,"no puede existir un mismo correo \"${1}\" por favor intenta con otro"));
+		mensajes.put(CodigoMensaje.M00061.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00061,"El campo Direccion no puede estar vacio"));
+		mensajes.put(CodigoMensaje.M00062.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00062," Ya existe una sede con la direccion \"${1}\" asociado al parqueadero asociado"));
 	}
 
 	@Override
