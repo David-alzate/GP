@@ -16,8 +16,12 @@ import co.com.park.gp.crosscutting.helpers.ObjectHelper;
 import co.com.park.gp.crosscutting.helpers.TextHelper;
 import co.com.park.gp.crosscutting.helpers.UUIDHelper;
 import co.com.park.gp.data.dao.factory.DAOFactory;
+import co.com.park.gp.entity.CiudadEntity;
+import co.com.park.gp.entity.DepartamentoEntity;
+import co.com.park.gp.entity.PaisEntity;
 import co.com.park.gp.entity.ParqueaderoEntity;
 import co.com.park.gp.entity.SedeEntity;
+import co.com.park.gp.entity.TipoSedeEntity;
 
 public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
@@ -35,6 +39,12 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 
 	@Override
 	public void execute(final SedeDomain data) {
+		
+		validarParqueaderoExista(data.getParqueadero().getId());
+		validarTipoSedeExista(data.getTipoSede().getId());
+		validarPaisExista(data.getPais().getId());
+		validarDepartamentoExista(data.getDepartamento().getId());
+		validarCiudadExista(data.getCiudad().getId());
 		
 		validarSede(data.getNombre());
 		
@@ -88,7 +98,7 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (nombreSede.length() > 40) {
+		if (nombreSede.length() > 60) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00066);
 			throw new BusinessGPException(mensajeUsuario);
 		}
@@ -114,13 +124,13 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (direccion.length() < 5) {
+		if (direccion.length() < 2) {
 			var mensajeUsuario = TextHelper
 					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00067), direccion);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (direccion.length() > 100) {
+		if (direccion.length() > 60) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00068);
 			throw new BusinessGPException(mensajeUsuario);
 		}
@@ -191,4 +201,62 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 	}
+	
+	private void validarParqueaderoExista(final UUID idParqueadero) {
+		var parqueaderoEntity = ParqueaderoEntity.build().setId(idParqueadero);
+		
+		var resultados = factory.getParqueaderoDAO().consultar(parqueaderoEntity);
+		
+		if (resultados.isEmpty()) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00069);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	private void validarTipoSedeExista(final UUID idTipoSede) {
+		var tipoSedeEntity = TipoSedeEntity.build().setId(idTipoSede);
+		
+		var resultados = factory.getTipoSedeDAO().consultar(tipoSedeEntity);
+		
+		if (resultados.isEmpty()) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00070);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	private void validarPaisExista(final UUID idPais) {
+		var paisExistaEntity = PaisEntity.build().setId(idPais);
+		
+		var resultados = factory.getPaisDAO().consultar(paisExistaEntity);
+		
+		if (resultados.isEmpty()) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00071);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	private void validarDepartamentoExista(final UUID idDepartamento) {
+		var departamentoEntity = DepartamentoEntity.build().setId(idDepartamento);
+		
+		var resultados = factory.getDepartamentoDAO().consultar(departamentoEntity);
+		
+		if (resultados.isEmpty()) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00072);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	private void validarCiudadExista(final UUID idCiudad) {
+		var ciudadEntity = CiudadEntity.build().setId(idCiudad);
+		
+		var resultados = factory.getCiudadDAO().consultar(ciudadEntity);
+		
+		if (resultados.isEmpty()) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00073);
+			throw new BusinessGPException(mensajeUsuario);
+		}
+	}
+	
+	
+	
 }

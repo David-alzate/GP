@@ -153,6 +153,16 @@ public class MessageCatalogBase implements MessageCatalog {
 				new Mensaje(CodigoMensaje.M00067, "El nombre \"${1}\" para la direccion es demasiado corto"));
 		mensajes.put(CodigoMensaje.M00068.getIdentificador(),
 				new Mensaje(CodigoMensaje.M00068, "El nombre de la direccion es demasiado largo"));
+		mensajes.put(CodigoMensaje.M00069.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00069, "El parqueadero al que desea asociar a la sede no existe"));
+		mensajes.put(CodigoMensaje.M00070.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00070, "El Tipo sede al que desea asociar a la sede no existe"));
+		mensajes.put(CodigoMensaje.M00071.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00071, "El Pais al que desea asociar a la sede no existe"));
+		mensajes.put(CodigoMensaje.M00072.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00072, "El Departamento al que desea asociar a la sede no existe"));
+		mensajes.put(CodigoMensaje.M00073.getIdentificador(),
+				new Mensaje(CodigoMensaje.M00073, "La ciudad al que desea asociar a la sede no existe"));
 
 	}
 
