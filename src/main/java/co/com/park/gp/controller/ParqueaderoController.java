@@ -33,14 +33,12 @@ public class ParqueaderoController {
 		}catch(final GPException excepcion) {
 			httpStatusCode = HttpStatus.BAD_REQUEST;
 			parqueaderoResponse.getMensajes().add(excepcion.getMensajeUsuario());
-			excepcion.printStackTrace();
 		}catch(final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 			
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00029);
 			parqueaderoResponse.getMensajes().add(mensajeUsuario);
 			
-			excepcion.printStackTrace();
 		}
 		
 		return new ResponseEntity<>(parqueaderoResponse,httpStatusCode);
