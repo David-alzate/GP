@@ -24,6 +24,13 @@ import co.com.park.gp.entity.SedeEntity;
 import co.com.park.gp.entity.TipoSedeEntity;
 
 public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
+	
+
+	public static final int MIN_LONGITUD = 2;
+
+	public static final int MAX_LONGITUD = 60;
+
+	public static final int CANTIDAD_CELDA_MIN = 0;
 
 	private DAOFactory factory;
 
@@ -92,13 +99,13 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (nombreSede.length() < 2) {
+		if (nombreSede.length() < MIN_LONGITUD) {
 			var mensajeUsuario = TextHelper
 					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00065), nombreSede);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (nombreSede.length() > 60) {
+		if (nombreSede.length() > MAX_LONGITUD) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00066);
 			throw new BusinessGPException(mensajeUsuario);
 		}
@@ -111,7 +118,7 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (!correo.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+		if(!TextHelper.isValidoEmail(correo)) {
 			var mensajeUsuario = TextHelper
 					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00059), correo);
 			throw new BusinessGPException(mensajeUsuario);
@@ -124,38 +131,38 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (direccion.length() < 2) {
+		if (direccion.length() < MIN_LONGITUD) {
 			var mensajeUsuario = TextHelper
 					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00067), direccion);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (direccion.length() > 60) {
+		if (direccion.length() > MAX_LONGITUD) {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00068);
 			throw new BusinessGPException(mensajeUsuario);
 		}
 	}
 
 	private void validarCantidadCeldas(final int celdasCarro, final int celdasMoto, final int celdasCamion) {
-		if (celdasCarro < 0) {
+		if (celdasCarro < CANTIDAD_CELDA_MIN) {
 			var mensajeUsuario = TextHelper.reemplazarParametro(
 					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCarro");
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (celdasMoto < 0) {
+		if (celdasMoto < CANTIDAD_CELDA_MIN) {
 			var mensajeUsuario = TextHelper.reemplazarParametro(
 					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasMoto");
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (celdasCamion < 0) {
+		if (celdasCamion < CANTIDAD_CELDA_MIN) {
 			var mensajeUsuario = TextHelper.reemplazarParametro(
 					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCamion");
 			throw new BusinessGPException(mensajeUsuario);
 		}
 
-		if (celdasCarro + celdasMoto + celdasCamion == 0) {
+		if (celdasCarro + celdasMoto + celdasCamion == CANTIDAD_CELDA_MIN) {
 			var mensajeUsuario = TextHelper.reemplazarParametro(
 					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00064), "celdasCarro", "celdasMoto",
 					"celdasCamion");

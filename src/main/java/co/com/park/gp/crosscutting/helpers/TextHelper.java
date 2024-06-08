@@ -1,9 +1,13 @@
 package co.com.park.gp.crosscutting.helpers;
 
+import java.util.regex.Pattern;
+
 public class TextHelper {
 
 	public static final String EMPTY = "";
 	public static final String UNDERLINE = "_";
+	
+	private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
 
 	private TextHelper() {
 		super();
@@ -49,4 +53,8 @@ public class TextHelper {
 		}
 		return mensajeReemplazado;
 	}
+	
+    public static final boolean isValidoEmail(final String email) {
+        return !isNullOrEmpty(email) && EMAIL_PATTERN.matcher(email).matches();
+    }
 }
