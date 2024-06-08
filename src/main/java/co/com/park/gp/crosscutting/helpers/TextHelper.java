@@ -53,8 +53,8 @@ public class TextHelper {
 		}
 		return mensajeReemplazado;
 	}
-	
-    public static final boolean isValidEmail(final String email) {
+
+    public static final boolean isValidoEmail(final String email) {
         return !isNullOrEmpty(email) && EMAIL_PATTERN.matcher(email).matches();
     }
 

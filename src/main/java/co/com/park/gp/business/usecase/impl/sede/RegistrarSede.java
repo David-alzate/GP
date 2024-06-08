@@ -25,6 +25,7 @@ import co.com.park.gp.entity.TipoSedeEntity;
 
 public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 	
+
 	public static final int MIN_LONGITUD = 2;
 	
 	public static final int MAX_LONGITUD = 60;
@@ -116,8 +117,8 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00058);
 			throw new BusinessGPException(mensajeUsuario);
 		}
-		
-		if(!TextHelper.isValidEmail(correo)) {
+
+		if(!TextHelper.isValidoEmail(correo)) {
 			var mensajeUsuario = TextHelper
 					.reemplazarParametro(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00059), correo);
 			throw new BusinessGPException(mensajeUsuario);
@@ -143,7 +144,7 @@ public final class RegistrarSede implements UseCaseWithoutReturn<SedeDomain> {
 	}
 
 	private void validarCantidadCeldas(final int celdasCarro, final int celdasMoto, final int celdasCamion) {
-		if (celdasCarro < 0) {
+		if (celdasCarro < CANTIDAD_CELDA_MIN) {
 			var mensajeUsuario = TextHelper.reemplazarParametro(
 					MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00063), "celdasCarro");
 			throw new BusinessGPException(mensajeUsuario);
